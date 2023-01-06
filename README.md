@@ -46,9 +46,6 @@ return Socialite::driver('pingid')->redirect();
 ### Returned User fields
 
 - ``id``
-- ``nickname``
 - ``name``
-- ``avatar``
 - ``email`` 
-- ``avatar`` 
 - ``user``
