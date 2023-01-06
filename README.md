@@ -11,10 +11,12 @@ Please see the [Base Installation Guide](https://socialiteproviders.com/usage/),
 ### Add configuration to `config/services.php`
 
 ```php
-'pingid' => [    
+'pingid' => [
+  'base_url' => env('PINGID_BASE_URL'),
   'client_id' => env('PINGID_CLIENT_ID'),  
   'client_secret' => env('PINGID_CLIENT_SECRET'),  
-  'redirect' => env('PINGID_REDIRECT_URI') 
+  'redirect' => env('PINGID_REDIRECT_URI'),
+  'logout_redirect' => env('PINGID_LOGOUT_REDIRECT_URI'),
 ],
 ```
 

@@ -2,6 +2,7 @@
 
 namespace SocialiteProviders\PingID;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
@@ -47,7 +48,26 @@ class Provider extends AbstractProvider
     /** {@inheritdoc} */
     public static function additionalConfigKeys()
     {
-        return ['base_url'];
+        return [
+            'base_url',
+            'logout_redirect',
+        ];
+    }
+
+    /**
+     * Logout and redirect the user of the application to defined logout URL.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout()
+    {
+        $url = $this->mountUrl('idp/startSLO.ping');
+
+        if ($logoutRedirect = $this->getConfig('logout_redirect')) {
+            $url .= '?'.http_build_query(['TargetResource' => $logoutRedirect]);
+        }
+
+        return new RedirectResponse($url);
     }
 
     /** {@inheritdoc} */
